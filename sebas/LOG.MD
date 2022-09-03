@@ -9,6 +9,13 @@ Entry types:
 * Versions: Usual changelog entries
 * Development sessions: Freeform entries made as I worked.
 
+## Development session log #2
+13:05 September 3rd, 2022
+
+Just chilling and coding, listening to Cesária Évora. I've got to find a way for functions that return the same type of object to be typed correctly.
+
+Well, this is not much, but it's progress, I guess.
+
 ## Development session log #1
 20:56 September 1st, 2022
 

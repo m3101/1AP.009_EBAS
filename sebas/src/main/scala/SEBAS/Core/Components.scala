@@ -1,28 +1,25 @@
 package SEBAS.core
 
-class Situation
+trait Situation
 
-class Effect
+trait Effect
 
-class Agent[ActionType<:Action[EffectType,_],EffectType<:Effect,SituationType<:Situation]{
+abstract class Agent[ActionType<:Action[EffectType,_],EffectType<:Effect,SituationType<:Situation]{
     var situation:SituationType
-    def be_affected(e:EffectType):Agent[ActionType,EffectType,SituationType] = ???
-    def decide():ActionType = ???
+    def be_affected(e:EffectType):Agent[ActionType,EffectType,SituationType]
+    def decide():ActionType
 }
 
-class Action[EffectType<:Effect,MediaType<:Medium[_,EffectType]]{
-    def happen(m:Set[MediaType]):EffectType = ???
+abstract class Action[EffectType<:Effect,MediaType<:Medium[_,EffectType]]{
+    def happen(m:Set[MediaType]):Unit
 }
 
-class Plan[ActionType<:Action[_,MediumType],MediumType<:Medium[_,_]]{
-    var media:Set[MediumType]
-    def schedule(a:ActionType):Plan[ActionType,MediumType] = ???
-    def resolve():Plan[ActionType,MediumType] = ???
+abstract class Plan[ActionType<:Action[_,MediumType],MediumType<:Medium[_,_]]{
+    var media:Set[MediumType] = Set.empty
+    def schedule(a:ActionType):Plan[ActionType,MediumType]
+    def resolve():Plan[ActionType,MediumType]
 }
 
-class Medium[AgentType<:Agent[_,EffectType,_],EffectType<:Effect]{
+abstract class Medium[AgentType<:Agent[_,EffectType,_],EffectType<:Effect]{
     var agents:Set[AgentType] = Set.empty
-    def effect(e:EffectType):Medium[AgentType,EffectType] = {
-        agents = agents.map(a=>a.be_affected(e))
-    }
 }
